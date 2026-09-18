@@ -143,6 +143,11 @@
     return value.replace(/\s+/g, " ").trim();
   }
 
+  function getEventLocation() {
+    const location = document.getElementById("eventLocation");
+    return normalizeText(location?.innerText || location?.textContent || "");
+  }
+
   function escapeCalendarText(value) {
     return value
       .replace(/\\/g, "\\\\")
@@ -156,7 +161,7 @@
   }
 
   function downloadCalendar() {
-    const location = normalizeText(document.getElementById("eventLocation")?.textContent || "");
+    const location = getEventLocation();
     const lines = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
@@ -207,7 +212,7 @@
     const calendarButton = document.getElementById("calendarBtn");
     const addressButton = document.getElementById("copyAddress");
     const eventStatus = document.getElementById("eventActionStatus");
-    const location = normalizeText(document.getElementById("eventLocation")?.textContent || "");
+    const location = getEventLocation();
 
     calendarButton?.addEventListener("click", () => {
       downloadCalendar();

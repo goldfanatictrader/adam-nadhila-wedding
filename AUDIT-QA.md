@@ -4,13 +4,28 @@ Tanggal audit: 18 September 2026
 
 Baseline: commit `f67ee69` (`Redesign wedding invitation experience`)
 
-Status: layak dilanjutkan, tanpa blocker
+Status: remediasi diterapkan dan QA regresi lulus, tanpa blocker
 
 ## Ringkasan
 
 Audit mencakup peninjauan HTML, CSS, JavaScript, konfigurasi Netlify dan Dev Container, serta QA interaktif menggunakan Chromium. Pengujian dilakukan pada viewport desktop `2160×1350`, mobile `390×844`, dan mobile kecil `319×640`.
 
 Ditemukan satu isu prioritas tinggi, tiga isu prioritas menengah, dan dua isu prioritas rendah. Tidak ditemukan error JavaScript pada clean run, anchor internal rusak, ID duplikat, label form yang hilang, target interaksi di bawah 24 piksel, atau gambar gagal dimuat.
+
+## Status Remediasi
+
+Perbaikan diterapkan pada 18 September 2026 dengan status berikut:
+
+| ID | Status | Perubahan |
+| --- | --- | --- |
+| AQ-01 | Selesai | Alamat dibaca melalui `innerText` agar pemisah `<br>` dipertahankan sebelum normalisasi. |
+| AQ-02 | Selesai | Ukuran teks ringkasan acara, tombol, navigasi, dan musik dinaikkan pada mobile. |
+| AQ-03 | Selesai | Nama tamu diberi `overflow-wrap: anywhere`. |
+| AQ-04 | Sebagian | Open Graph, Twitter Card, dan favicon ditambahkan. `og:url` menunggu URL deployment resmi. |
+| AQ-05 | Selesai | Grup foto diberi `role="group"`; label yang tidak diperlukan pada tanggal dihapus. |
+| AQ-06 | Menunggu data | `DTEND` atau `DURATION` belum dapat ditambahkan karena waktu selesai acara tidak tercantum dalam spesifikasi. |
+
+QA regresi lulus di Chromium pada viewport desktop `1440×900`, mobile `390×844`, dan mobile kecil `319×640`. Alamat clipboard serta `LOCATION` pada file `.ics` kini memiliki pemisah yang benar, nama tamu 80 karakter tetap dapat diakses pada layar terkecil, dan pemeriksaan Axe untuk `aria-prohibited-attr` tidak lagi menghasilkan temuan.
 
 ## Temuan
 

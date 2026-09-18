@@ -387,7 +387,9 @@ dd {
 }
 
 .guest-card strong {
+  max-width: 100%;
   font-weight: 500;
+  overflow-wrap: anywhere;
 }
 
 .gate .button {
@@ -1723,11 +1725,12 @@ dd {
   }
 
   .quick-facts dt {
-    font-size: 0.57rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
   }
 
   .quick-facts dd {
-    font-size: 0.76rem;
+    font-size: 0.875rem;
   }
 
   .welcome-actions {
@@ -1739,7 +1742,7 @@ dd {
   .welcome-actions .button {
     min-height: 48px;
     padding: 0 12px;
-    font-size: 0.74rem;
+    font-size: 0.82rem;
   }
 
   .person-card {
@@ -1861,7 +1864,7 @@ dd {
     min-width: 0;
     flex: 1;
     padding: 0 8px;
-    font-size: 0.67rem;
+    font-size: 0.75rem;
   }
 
   .music-toggle {
@@ -1869,6 +1872,7 @@ dd {
     right: 12px;
     min-height: 44px;
     padding: 0 12px;
+    font-size: 0.75rem;
   }
 }
 
