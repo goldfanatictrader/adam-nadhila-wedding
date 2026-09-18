@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Adam &amp; Nadhila — 26.12.2026</title>
+<meta name="description" content="An interactive prewedding film and wedding invitation for Adam & Nadhila — 26 Desember 2026, Bekasi." />
+<link rel="icon" href="data:," />
+<link rel="stylesheet" href="styles.css?v=10" />
+<script src="script.js?v=11" defer></script>
+</head>
+<body class="locked">
+<div class="progress" aria-hidden="true"><span></span></div>
+<audio id="bgMusic" src="assets/porcelain_and_teak.mp3" loop preload="auto"></audio>
+
+<!-- OPENING GATE -->
+<section id="gate" class="gate" aria-label="Buka undangan">
+  <img src="assets/hero.webp" alt="Adam dan Nadhila" class="gate-photo" />
+  <div class="gate-overlay"></div>
+  <div class="gate-content">
+    <p class="eyebrow light">THE WEDDING OF</p>
+    <h1>Adam <i>&amp;</i> Nadhila</h1>
+    <p class="date light">26 · 12 · 2026 — BEKASI</p>
+    <div class="guest-card">
+      <span>Kepada Yth.</span>
+      <strong id="guestName">Bapak/Ibu/Saudara/i</strong>
+    </div>
+    <button id="openInvitation" class="btn btn-light">Buka Undangan</button>
+  </div>
+</section>
+
+<main class="site-shell" id="mainContent" aria-hidden="true">
+  <!-- ============ CINEMATIC SCROLL (Mostar engine → wedding film) ============ -->
+  <section class="cinema-scroll" id="cinema" aria-label="Adam Nadhila cinematic scroll story">
+    <div class="stage">
+      <div class="world">
+
+        <div class="back-stack">
+          <img class="scene-img back-img back-four" src="assets/hero.webp" alt="" />
+          <img class="scene-img back-img back-bazaar" src="assets/everyday-1.webp" alt="" />
+        </div>
+        <div class="dim" aria-hidden="true"></div>
+
+        <h1 class="hero-title">ADAM &amp; NADHILA</h1>
+
+        <img class="scene-img splitframe-img splitframe-left" src="assets/transition.webp" alt="" />
+        <img class="scene-img splitframe-img splitframe-right" src="assets/transition.webp" alt="" />
+        <img class="scene-img frame-two-img" src="assets/horizon-4.webp" alt="" />
+        <div class="shade"></div>
+      </div>
+
+      <section class="intro-copy" aria-label="Wedding overview">
+        <p>Dari sehari-hari menuju selamanya — sebuah kota, sebuah cakrawala, dan satu hari yang akan selalu kami ingat.</p>
+        <div class="hero-tags" aria-label="Wedding highlights">
+          <span>26 Desember 2026</span>
+          <span>Akad 09.00 WIB</span>
+          <span>Bekasi</span>
+        </div>
+      </section>
+
+      <section class="story-panel story-panel-bridge" aria-label="Couple details">
+        <h2>Two lives, one direction.</h2>
+        <p>Adam Alfiansyah &amp; Nadhila Rachmawati, S.Psi. — dari banyak hari biasa menuju satu janji yang tenang.</p>
+        <dl class="facts">
+          <div><dt>26.12</dt><dd>Akad &amp; resepsi, Bekasi</dd></div>
+          <div><dt>09.00</dt><dd>WIB, kediaman mempelai wanita</dd></div>
+        </dl>
+      </section>
+
+      <section class="story-panel story-panel-bazaar" aria-label="Event details">
+        <h2>The day we say forever.</h2>
+        <p>Jalan batu, gang kecil, dan kopi tepi jalan — semuanya dalam jarak berjalan kaki dari janji kami.</p>
+        <button class="note-button" id="toEvent" type="button"><span aria-hidden="true">↗</span><span>Open event notes</span></button>
+      </section>
+    </div>
+  </section>
+
+  <!-- ============ COUPLE ============ -->
+  <section id="couple" class="couple section-pad reveal-section">
+    <div class="section-heading">
+      <p class="eyebrow">THE TWO OF US</p>
+      <h2>Adam <i>&amp;</i> Nadhila</h2>
+    </div>
+    <div class="couple-grid">
+      <article class="person-card">
+        <p class="role">Mempelai Pria</p>
+        <h3>Adam Alfiansyah</h3>
+        <p>Putra dari<br><strong>Alm. Bapak Dariansyah</strong><br>&amp; <strong>Almh. Ibu Ani Arumiati</strong></p>
+      </article>
+      <div class="journey-knot" aria-hidden="true"><span>A</span><b>∞</b><span>N</span></div>
+      <article class="person-card">
+        <p class="role">Mempelai Wanita</p>
+        <h3>Nadhila Rachmawati, S.Psi.</h3>
+        <p>Putri dari<br><strong>Bapak Sugiyanto</strong><br>&amp; <strong>Ibu Haniyah Ichlasiyahati</strong></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ DATE ============ -->
+  <section class="date-section reveal-section">
+    <div class="date-copy">
+      <p class="eyebrow">SAVE THE DATE</p>
+      <p class="weekday">Sabtu</p>
+      <div class="big-date">26</div>
+      <p class="month">Desember 2026</p>
+      <p class="time">09.00 WIB · Akad &amp; Resepsi</p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER I : EVERYDAY ============ -->
+  <section id="story" class="chapter chapter-urban">
+    <div class="chapter-hero parallax-wrap">
+      <img loading="lazy" src="assets/everyday-1.webp" alt="Adam dan Nadhila berjalan bersama" />
+      <div class="chapter-overlay"></div>
+      <div class="chapter-title">
+        <p class="eyebrow light">CHAPTER I — THE BEGINNING</p>
+        <h2>Our Everyday</h2>
+        <p>Di tengah dunia yang terus bergerak, kami menemukan seseorang untuk berjalan bersama.</p>
+      </div>
+    </div>
+    <div class="story-rail section-pad">
+      <article class="story-card reveal-card">
+        <img loading="lazy" src="assets/everyday-2.webp" alt="Pergi bersama" />
+        <div><span>01 — THE RIDE</span><h3>Pergi bersama.</h3></div>
+      </article>
+      <article class="story-card reverse reveal-card">
+        <img loading="lazy" src="assets/everyday-3.webp" alt="Berhenti sebentar" />
+        <div><span>02 — THE PAUSE</span><h3>Berhenti sebentar. Berbicara lebih lama.</h3></div>
+      </article>
+      <article class="quote-photo reveal-card">
+        <img loading="lazy" src="assets/everyday-4.webp" alt="Nadhila bersandar pada Adam" />
+        <blockquote>“Ada rumah yang bukan sebuah tempat.”</blockquote>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER II : HORIZON ============ -->
+  <section class="chapter chapter-coast">
+    <div class="chapter-hero parallax-wrap">
+      <img loading="lazy" src="assets/horizon-1.webp" alt="Adam dan Nadhila di tebing" />
+      <div class="chapter-overlay warm"></div>
+      <div class="chapter-title bottom">
+        <p class="eyebrow light">CHAPTER II — THE PROMISE</p>
+        <h2>Our Horizon</h2>
+        <p>Yang sederhana tumbuh menjadi sebuah keyakinan.</p>
+      </div>
+    </div>
+    <div class="coast-grid section-pad">
+      <figure class="editorial-photo tall reveal-card"><img loading="lazy" src="assets/horizon-2.webp" alt="Duduk bersama" /><figcaption>Tentang tetap memilih satu sama lain.</figcaption></figure>
+      <figure class="editorial-photo reveal-card"><img loading="lazy" src="assets/horizon-3.webp" alt="Berdiri dekat" /><figcaption class="one-word">Kita.</figcaption></figure>
+      <figure class="editorial-photo wide reveal-card"><img loading="lazy" src="assets/horizon-4.webp" alt="Berpelukan di tebing" /><figcaption>Tentang hari ini, esok, dan hari-hari setelahnya.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ============ EVENT ============ -->
+  <section id="event" class="event section-pad reveal-section">
+    <div class="event-card">
+      <p class="eyebrow">THE WEDDING DAY — CHAPTER III</p>
+      <p class="weekday">Sabtu</p>
+      <h2>26 Desember 2026</h2>
+      <p class="event-time">09.00 WIB · Akad &amp; Resepsi</p>
+      <div class="ornament"><span></span><b>✦</b><span></span></div>
+      <h3>Kediaman Mempelai Wanita</h3>
+      <p>Jl. Nilam II, No. 5, RT/RW 04/010<br>Jatiraden, Jatisampurna<br>Bekasi 17433</p>
+      <div class="button-row">
+        <a class="btn btn-dark" target="_blank" rel="noopener" href="https://maps.app.goo.gl/tYcqEJPrFE5dXKF79">Lihat Lokasi</a>
+        <button id="calendarBtn" class="btn btn-outline" type="button">Tambahkan ke Kalender</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALLERY JOURNEY ============ -->
+  <section class="gallery section-pad">
+    <div class="section-heading left reveal-section">
+      <p class="eyebrow">MEMORIES — GALLERY JOURNEY</p>
+      <h2>Little moments,<br><em>kept forever.</em></h2>
+    </div>
+    <div class="gallery-grid">
+      <button class="gallery-item g1" data-src="assets/gallery-1.webp"><img loading="lazy" src="assets/gallery-1.webp" alt="Momen Adam dan Nadhila" /></button>
+      <button class="gallery-item g2" data-src="assets/gallery-2.webp"><img loading="lazy" src="assets/gallery-2.webp" alt="Momen Adam dan Nadhila" /></button>
+      <button class="gallery-item g3" data-src="assets/gallery-3.webp"><img loading="lazy" src="assets/gallery-3.webp" alt="Momen Adam dan Nadhila" /></button>
+      <button class="gallery-item g4" data-src="assets/gallery-4.webp"><img loading="lazy" src="assets/gallery-4.webp" alt="Momen Adam dan Nadhila" /></button>
+      <button class="gallery-item g5" data-src="assets/gallery-5.webp"><img loading="lazy" src="assets/gallery-5.webp" alt="Momen Adam dan Nadhila" /></button>
+      <button class="gallery-item g6" data-src="assets/gallery-6.webp"><img loading="lazy" src="assets/gallery-6.webp" alt="Momen Adam dan Nadhila" /></button>
+    </div>
+  </section>
+
+  <!-- ============ RSVP ============ -->
+  <section id="rsvp" class="rsvp section-pad reveal-section">
+    <div class="rsvp-copy">
+      <p class="eyebrow">RSVP &amp; WISHES</p>
+      <h2>Will you<br><em>be there?</em></h2>
+      <p>Kehadiran Anda akan menjadi bagian yang berarti dalam hari bahagia kami.</p>
+    </div>
+    <form id="rsvpForm" name="rsvp" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="rsvp-form">
+      <input type="hidden" name="form-name" value="rsvp" />
+      <p class="hidden"><label>Jangan isi: <input name="bot-field" /></label></p>
+      <label>Nama<input required name="nama" autocomplete="name" placeholder="Nama Anda" /></label>
+      <label>Nomor WhatsApp<input name="whatsapp" inputmode="tel" placeholder="08xxxxxxxxxx" /></label>
+      <label>Konfirmasi Kehadiran
+        <select required name="kehadiran"><option value="">Pilih jawaban</option><option>Insya Allah, saya hadir</option><option>Mohon maaf, belum dapat hadir</option></select>
+      </label>
+      <label>Jumlah Tamu<select name="jumlah-tamu"><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+      <label>Ucapan &amp; Doa<textarea name="ucapan" rows="5" placeholder="Tuliskan doa terbaik Anda..."></textarea></label>
+      <button class="btn btn-dark" type="submit">Kirim Konfirmasi</button>
+      <p id="formStatus" class="form-status" role="status"></p>
+    </form>
+  </section>
+
+  <!-- ============ GIFT ============ -->
+  <section class="gift section-pad reveal-section">
+    <div class="gift-card">
+      <p class="eyebrow">WEDDING GIFT</p>
+      <h2>Tanda kasih.</h2>
+      <p>Kehadiran dan doa restu Anda merupakan hadiah yang sangat berarti bagi kami.</p>
+      <div class="bank-card">
+        <span>BCA</span><strong>7401662727</strong><small>a.n. Nadhila Rachmawati</small>
+        <button id="copyAccount" class="copy-btn" type="button">Salin Nomor Rekening</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING PORTRAIT ============ -->
+  <section class="closing parallax-wrap">
+    <img loading="lazy" src="assets/closing.webp" alt="Adam dan Nadhila berjalan bersama di tepi laut" />
+    <div class="closing-overlay"></div>
+    <div class="closing-copy reveal-section">
+      <p>We would be honored to celebrate this day with you.</p>
+      <h2>Adam <i>&amp;</i> Nadhila</h2>
+      <p class="date">26 · 12 · 2026</p>
+      <div class="closing-mark">A <span>∞</span> N</div>
+    </div>
+  </section>
+</main>
+
+<nav class="bottom-nav" id="bottomNav" aria-label="Navigasi undangan">
+  <a href="#cinema">Film</a><a href="#couple">Couple</a><a href="#story">Story</a><a href="#event">Event</a><a href="#rsvp">RSVP</a>
+</nav>
+
+<button class="music-float" id="musicToggle" aria-label="Toggle music">
+  <span aria-hidden="true">♪</span><span id="musicLabel">OFF</span>
+</button>
+
+<dialog id="lightbox"><button id="closeLightbox" aria-label="Tutup">×</button><img id="lightboxImage" alt="Foto Adam dan Nadhila" /></dialog>
+</body>
+</html>
