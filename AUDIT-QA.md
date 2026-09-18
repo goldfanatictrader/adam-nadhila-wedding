@@ -8,9 +8,9 @@ Status: remediasi diterapkan dan QA regresi lulus, tanpa blocker
 
 ## Ringkasan
 
-Audit mencakup peninjauan HTML, CSS, JavaScript, konfigurasi Netlify dan Dev Container, serta QA interaktif menggunakan Chromium. Pengujian dilakukan pada viewport desktop `2160×1350`, mobile `390×844`, dan mobile kecil `319×640`.
+Audit mencakup peninjauan HTML, CSS, JavaScript, konfigurasi Netlify dan Dev Container, serta QA interaktif menggunakan Chromium. Pengujian awal dilakukan pada viewport desktop `2160×1350`, mobile `390×844`, dan mobile kecil `319×640`. QA responsif lanjutan juga mencakup lebar efektif `319`, `390`, `739`, `922`, dan `1440` piksel.
 
-Ditemukan satu isu prioritas tinggi, tiga isu prioritas menengah, dan dua isu prioritas rendah. Tidak ditemukan error JavaScript pada clean run, anchor internal rusak, ID duplikat, label form yang hilang, target interaksi di bawah 24 piksel, atau gambar gagal dimuat.
+Ditemukan dua isu prioritas tinggi, tiga isu prioritas menengah, dan dua isu prioritas rendah. Tidak ditemukan error JavaScript pada clean run, anchor internal rusak, ID duplikat, label form yang hilang, target interaksi di bawah 24 piksel, atau gambar gagal dimuat.
 
 ## Status Remediasi
 
@@ -24,8 +24,9 @@ Perbaikan diterapkan pada 18 September 2026 dengan status berikut:
 | AQ-04 | Sebagian | Open Graph, Twitter Card, dan favicon ditambahkan. `og:url` menunggu URL deployment resmi. |
 | AQ-05 | Selesai | Grup foto diberi `role="group"`; label yang tidak diperlukan pada tanggal dihapus. |
 | AQ-06 | Menunggu data | `DTEND` atau `DURATION` belum dapat ditambahkan karena waktu selesai acara tidak tercantum dalam spesifikasi. |
+| AQ-07 | Selesai | Ornamen di bagian pasangan dibatasi ke section, root diberi fallback overflow untuk Android lama, dan grid RSVP dibuat fleksibel pada tablet. |
 
-QA regresi lulus di Chromium pada viewport desktop `1440×900`, mobile `390×844`, dan mobile kecil `319×640`. Alamat clipboard serta `LOCATION` pada file `.ics` kini memiliki pemisah yang benar, nama tamu 80 karakter tetap dapat diakses pada layar terkecil, dan pemeriksaan Axe untuk `aria-prohibited-attr` tidak lagi menghasilkan temuan.
+QA regresi lulus di Chromium pada lebar efektif `319`, `390`, `739`, `922`, dan `1440` piksel. Pada seluruh ukuran tersebut, lebar scroll root sama dengan lebar viewport dan percobaan scroll horizontal tetap di posisi `0`. Alamat clipboard serta `LOCATION` pada file `.ics` kini memiliki pemisah yang benar, nama tamu 80 karakter tetap dapat diakses pada layar terkecil, dan pemeriksaan Axe untuk `aria-prohibited-attr` tidak lagi menghasilkan temuan.
 
 ## Temuan
 
@@ -90,6 +91,14 @@ Dampak: sebagian aplikasi kalender dapat menampilkan acara dengan durasi nol ata
 
 Rekomendasi: tambahkan waktu selesai setelah durasi resmi acara dikonfirmasi.
 
+### AQ-07 — P1 — Ornamen dekoratif menyebabkan white space horizontal
+
+Pseudo-element dekoratif pada `.couple` diposisikan di luar batas section dan ikut memperlebar area scroll dokumen. Pada browser Android tertentu, `overflow-x: clip` di `body` saja tidak cukup sebagai fallback sehingga halaman dapat bergeser ke kanan dan menampilkan bidang kosong. QA lanjutan juga menemukan grid RSVP masih mempertahankan lebar minimum desktop pada ukuran tablet.
+
+Dampak: halaman terlihat tidak responsif, memiliki white space di sisi kanan, dan form RSVP dapat terpotong pada lebar sekitar `922px`.
+
+Remediasi: batasi ornamen pada `.couple`, tambahkan fallback `overflow-x: hidden` sebelum `clip` pada root dan body, serta gunakan kolom fleksibel untuk RSVP pada breakpoint tablet.
+
 ## Pengujian yang Lulus
 
 - Personalisasi melalui `?to=` dan `?guest=`.
@@ -107,6 +116,7 @@ Rekomendasi: tambahkan waktu selesai setelah durasi resmi acara dikonfirmasi.
 - State mengirim, sukses, dan gagal pada RSVP.
 - Semua 15 gambar yang direferensikan berhasil dimuat.
 - Tidak ada ID duplikat, anchor internal hilang, field tanpa label, atau tombol tanpa `type`.
+- Tidak ada scroll horizontal pada lebar efektif `319`, `390`, `739`, `922`, dan `1440` piksel; grid RSVP tidak lagi terpotong pada tablet.
 - Axe: 28 pemeriksaan lulus dan tidak ada pelanggaran otomatis yang terkonfirmasi. Kontras pada teks di atas gambar tetap memerlukan penilaian manual.
 
 ## Catatan Kinerja

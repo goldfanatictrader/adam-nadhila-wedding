@@ -32,6 +32,9 @@
 
 html {
   min-height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
   background: var(--color-canvas);
@@ -39,7 +42,9 @@ html {
 
 body {
   min-height: 100%;
+  max-width: 100%;
   margin: 0;
+  overflow-x: hidden;
   overflow-x: clip;
   background: var(--color-canvas);
   color: var(--color-ink);
@@ -570,6 +575,8 @@ dd {
 /* Couple */
 .couple {
   position: relative;
+  overflow: hidden;
+  overflow: clip;
   background: var(--color-surface);
 }
 
@@ -1495,6 +1502,10 @@ dd {
   .rsvp,
   .gift {
     gap: 65px;
+  }
+
+  .rsvp {
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
   }
 }
 
