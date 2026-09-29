@@ -131,3 +131,24 @@ Remediasi: batasi ornamen pada `.couple`, tambahkan fallback `overflow-x: hidden
 - Respons sukses dan gagal RSVP diuji dengan mock HTTP; penerimaan submission pada backend Netlify produksi belum diverifikasi.
 - Pengujian browser dilakukan di Chromium; Safari dan Firefox belum diuji.
 - Preview WhatsApp atau platform sosial belum diuji karena metadata Open Graph belum tersedia.
+
+## Verifikasi Revisi — 29 September 2026
+
+Revisi berdasarkan `spec.md` telah diterapkan dan diperiksa di Chromium melalui preview statis lokal. Cakupan: lokasi pembuka/hero dan metadata, gelar Adam serta Instagram, MP3 I Got Mine, label Akad & Syukuran, foto acara `gallery-6.webp`, dua rekening dengan angka lebih kecil, dan panduan berbagi terpisah.
+
+Hasil verifikasi:
+
+- Lebar 320, 390, 768, 1024, dan 1440 px: tidak ada overflow horizontal atau teks baru terpotong. Nomor rekening berukuran 24–32 px; tautan Instagram memiliki tinggi target 44 px dan tombol salin 50 px.
+- Personalisasi default, nilai kosong, `?to=`, `?guest=`, nama dengan spasi/ampersand, emoji, 80 karakter tanpa spasi, dan teks menyerupai HTML lulus. Nama tetap menjadi teks dan membungkus pada layar 320 px.
+- MP3 lokal berukuran 3.683.672 byte, durasi sekitar 238,98 detik. Tidak ada permintaan MP3 sebelum pembukaan; playback setelah interaksi dan pause/resume lulus. Penolakan playback serta kegagalan permintaan audio disimulasikan dan tidak menghalangi pembukaan/navigasi.
+- Clipboard nyata menyalin BCA `7401662727` dan BNI `1229896497` dengan benar. Feedback serta timer kedua kartu independen. Fallback ketika Clipboard API tidak tersedia lulus; kegagalan API dan fallback menampilkan petunjuk manual tanpa label sukses tersisa.
+- File kalender berhasil diunduh dengan nama `Adam-Nadhila-26-12-2026.ics`, waktu `20261226T020000Z`, gelar Adam yang diperbarui, dan alamat dengan pemisah yang benar. Tujuan Maps tetap sesuai sumber sebelumnya. Perilaku kalender pada checkout dipertahankan; tidak mengimpor perubahan kalender dari situs publik.
+- Keenam lightbox dapat dibuka dan ditutup dengan Escape; fokus kembali ke pemicu. Gate dapat dibuka dengan Enter dan memindahkan fokus ke judul. Kedua tautan Instagram menampilkan outline saat berpindah menggunakan Tab/Shift+Tab; tombol salin dapat diaktifkan dengan Enter.
+- Mode reduced motion, nama wajib pada RSVP, serta perubahan jumlah tamu berdasarkan kehadiran lulus tanpa mengirim form ke produksi.
+- Seluruh 14 elemen gambar dengan sumber tetap berhasil dimuat pada pemeriksaan akhir. Tidak ada error JavaScript atau respons aset lokal gagal pada pemuatan bersih.
+- Pemeriksaan statis memastikan ID unik, seluruh referensi aset lokal tersedia, dan `git diff --check` lulus. Markup story, galeri, RSVP, dan penutup identik dengan baseline.
+- Pemeriksaan visual desktop/mobile memastikan foto acara menampilkan wajah di atas blok tanggal, lokasi panjang tetap terbaca, dan kedua kartu bank tersusun sesuai spesifikasi. Urutan lapisan foto hero mobile diperbaiki agar overlay berada di atas foto dan teks lokasi memiliki kontras yang memadai.
+
+Template WhatsApp tersedia di `PANDUAN-UNDANGAN.md` dengan contoh penerima dan tautan yang cocok. Pesan tidak dikirim otomatis.
+
+Batas pengujian: Chromium saja; Safari/Firefox, preview WhatsApp, dan penerimaan RSVP oleh backend produksi tidak diverifikasi. Preview memakai server statis lokal karena lingkungan belum memiliki service/task preview proyek. Gangguan proses preview awal diperbaiki sebelum pemuatan bersih terakhir. Tidak ada deployment produksi pada tahap ini.

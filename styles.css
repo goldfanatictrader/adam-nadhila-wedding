@@ -366,10 +366,19 @@ dd {
 }
 
 .gate-date {
+  display: grid;
+  gap: 8px;
   margin: 27px 0 36px;
   font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: 0.24em;
+}
+
+.gate-location {
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  text-wrap: balance;
 }
 
 .guest-card {
@@ -466,7 +475,7 @@ dd {
 
 .quick-facts {
   display: grid;
-  grid-template-columns: 1.35fr 1fr 0.8fr;
+  grid-template-columns: 1.2fr 0.9fr 1.5fr;
   max-width: 660px;
   margin: 0 0 30px;
   padding: 20px 0;
@@ -647,9 +656,26 @@ dd {
   line-height: 0.95;
 }
 
-.person-card p:last-child {
+.person-card h3 + p {
   margin: 0;
   color: var(--color-muted);
+}
+
+.person-instagram {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 18px;
+  padding: 8px 10px;
+  color: var(--color-rose);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+
+.person-instagram:hover {
+  color: var(--color-ink);
 }
 
 .person-card strong {
@@ -908,12 +934,12 @@ dd {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   padding: 50px 28px;
   color: #fff;
   background:
-    linear-gradient(rgba(73, 58, 61, 0.35), rgba(73, 58, 61, 0.58)),
-    url("assets/horizon-4.webp") center / cover;
+    linear-gradient(180deg, rgba(73, 58, 61, 0.08) 30%, rgba(38, 29, 31, 0.78)),
+    url("assets/gallery-6.webp") center 25% / cover;
   text-align: center;
 }
 
@@ -1220,43 +1246,50 @@ dd {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.bank-cards {
+  width: min(100%, 520px);
+  min-width: 0;
+  display: grid;
+  gap: 24px;
+}
+
 .bank-card {
   position: relative;
-  max-width: 520px;
+  min-width: 0;
   display: grid;
-  padding: clamp(36px, 6vw, 64px);
+  padding: 32px clamp(24px, 3vw, 40px) 24px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 180px 180px var(--radius-medium) var(--radius-medium);
+  border-radius: 80px 80px var(--radius-medium) var(--radius-medium);
   background: rgba(255, 255, 255, 0.055);
   text-align: center;
 }
 
 .bank-name {
-  margin-bottom: 38px;
+  margin-bottom: 14px;
   font-weight: 600;
   letter-spacing: 0.3em;
 }
 
 .bank-label {
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.bank-card strong {
-  margin: 4px 0 5px;
+.account-number {
+  margin: 6px 0;
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
   font-weight: 500;
   letter-spacing: 0.025em;
-  line-height: 1;
+  line-height: 1.3;
 }
 
 .account-name {
-  margin-bottom: 30px;
-  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 18px;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.84rem;
 }
 
@@ -1562,6 +1595,7 @@ dd {
   .welcome-visual {
     position: absolute;
     inset: 0;
+    z-index: 0;
     width: auto;
     padding: 0;
   }
@@ -1654,7 +1688,7 @@ dd {
   }
 
   .event-date {
-    min-height: 420px;
+    min-height: 560px;
   }
 
   .event-details {
@@ -1671,7 +1705,7 @@ dd {
   }
 
   .gift-copy,
-  .bank-card {
+  .bank-cards {
     width: min(100%, 620px);
     margin: 0 auto;
   }
@@ -1728,11 +1762,22 @@ dd {
   }
 
   .quick-facts {
-    grid-template-columns: 1.25fr 0.9fr 0.7fr;
+    grid-template-columns: 1.25fr 1fr;
   }
 
   .quick-facts > div {
     padding: 0 10px;
+  }
+
+  .quick-facts > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .quick-facts > div:last-child {
+    grid-column: 1 / -1;
+    margin-top: 12px;
+    padding: 12px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .quick-facts dt {
@@ -1777,7 +1822,8 @@ dd {
   }
 
   .event-date {
-    min-height: 350px;
+    min-height: 460px;
+    padding: 32px 24px;
   }
 
   .event-date strong {
@@ -1841,16 +1887,8 @@ dd {
   }
 
   .bank-card {
-    padding: 52px 24px 34px;
-    border-radius: 130px 130px 18px 18px;
-  }
-
-  .bank-name {
-    margin-bottom: 27px;
-  }
-
-  .bank-card strong {
-    font-size: clamp(2.5rem, 13vw, 3.6rem);
+    padding: 32px 24px 24px;
+    border-radius: 70px 70px 18px 18px;
   }
 
   .closing {

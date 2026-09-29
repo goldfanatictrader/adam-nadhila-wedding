@@ -174,7 +174,7 @@
       "DTSTART:20261226T020000Z",
       "SUMMARY:Pernikahan Adam & Nadhila",
       `LOCATION:${escapeCalendarText(location)}`,
-      "DESCRIPTION:Pernikahan Adam Alfiansyah & Nadhila Rachmawati\\, S.Psi.",
+      "DESCRIPTION:Pernikahan Adam Alfiansyah S.H & Nadhila Rachmawati\\, S.Psi.",
       "END:VEVENT",
       "END:VCALENDAR",
     ];
@@ -309,22 +309,35 @@
   }
 
   function initializeGiftCopy() {
-    const copyButton = document.getElementById("copyAccount");
-    const accountNumber = document.getElementById("accountNumber");
-    const copyStatus = document.getElementById("copyStatus");
+    document.querySelectorAll(".bank-card").forEach((card) => {
+      const copyButton = card.querySelector(".copy-account");
+      const accountNumber = card.querySelector(".account-number");
+      const copyStatus = card.querySelector(".copy-status");
+      const bankName = card.querySelector(".bank-name")?.textContent.trim();
+      if (!copyButton || !accountNumber || !copyStatus) return;
 
-    copyButton?.addEventListener("click", async () => {
-      try {
-        await copyText(normalizeText(accountNumber?.textContent || ""));
-        copyButton.textContent = "Nomor Rekening Disalin ✓";
-        if (copyStatus) copyStatus.textContent = "Nomor rekening berhasil disalin.";
-      } catch (error) {
-        if (copyStatus) copyStatus.textContent = "Nomor belum dapat disalin. Silakan pilih nomor secara manual.";
-      }
+      const defaultLabel = copyButton.textContent;
+      let resetTimer;
 
-      window.setTimeout(() => {
-        copyButton.textContent = "Salin Nomor Rekening";
-      }, 2400);
+      copyButton.addEventListener("click", async () => {
+        window.clearTimeout(resetTimer);
+        copyButton.disabled = true;
+        copyButton.textContent = defaultLabel;
+        copyStatus.textContent = "";
+
+        try {
+          await copyText(normalizeText(accountNumber.textContent));
+          copyButton.textContent = "Nomor Rekening Disalin ✓";
+          copyStatus.textContent = `Nomor rekening ${bankName} berhasil disalin.`;
+        } catch (error) {
+          copyStatus.textContent = `Nomor rekening ${bankName} belum dapat disalin. Silakan pilih nomor secara manual.`;
+        } finally {
+          copyButton.disabled = false;
+          resetTimer = window.setTimeout(() => {
+            copyButton.textContent = defaultLabel;
+          }, 2400);
+        }
+      });
     });
   }
 
