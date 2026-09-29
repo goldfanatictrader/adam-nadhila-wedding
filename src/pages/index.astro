@@ -1,0 +1,275 @@
+---
+import Site from '../layouts/Site.astro';
+import TemplateArt from '../components/TemplateArt.astro';
+import BrandLogo from '../components/BrandLogo.astro';
+import { templates, plans, rupiah } from '../lib/catalog';
+import { env } from 'cloudflare:workers';
+import type { Env } from '../lib/types';
+import { priceBook } from '../lib/server/billing';
+let pricePlans = plans;
+try {
+  pricePlans = (await priceBook(env as unknown as Env)).plans;
+} catch {}
+---
+
+<Site>
+  <main id="main-content" tabindex="-1" class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">SEBUAH AWAL YANG INDAH</span>
+        <h1>
+          Kisah Anda.
+          <br />
+          Undangan yang
+          <br />
+          <em>begitu personal.</em>
+        </h1>
+        <p>
+          Dari “iya” yang pertama hingga hari bahagia. Buat undangan pernikahan yang menceritakan
+          Anda, dengan cara yang sederhana.
+        </p>
+        <div class="row hero-actions">
+          <a class="btn" href="/register">
+            Buat undangan Anda <span aria-hidden="true">↗</span>
+          </a>
+          <a class="btn secondary" href="#templates">
+            Temukan template
+          </a>
+        </div>
+        <p class="note" style="font-size:12px;margin-top:20px">
+          Coba draf gratis 7 hari. Paket mulai Rp49.000 per acara.
+        </p>
+      </div>
+      <div
+        class="hero-art"
+        aria-label="Nuansa perayaan hangat dan pratinjau template Minimal Ivory"
+      >
+        <div class="hero-orbit" aria-hidden="true"></div>
+        <div class="hero-photo">
+          <img
+            src="/brand/celebration-1100.webp"
+            srcset="/brand/celebration-640.webp 640w, /brand/celebration-1100.webp 1100w"
+            sizes="(max-width:640px) 85vw, 42vw"
+            width="1100"
+            height="1650"
+            alt="Rangkaian bunga dan meja perayaan dalam cahaya hangat"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="hero-phone" aria-hidden="true">
+          <img src="/brand/template-previews/minimal-ivory.webp" width="390" height="900" alt="" />
+        </div>
+        <div class="hero-stamp" aria-hidden="true">
+          <BrandLogo variant="symbol" decorative />
+        </div>
+        <div class="hero-note">
+          <img src="/brand/symbol.svg" alt="" width="38" height="38" />
+          <span>
+            <strong>Begitu Anda. Begitu berarti.</strong>Satu tautan, banyak kenangan.
+          </span>
+        </div>
+      </div>
+    </section>
+    <div class="features">
+      <article>
+        <span class="icon-tile" aria-hidden="true">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <rect x="5" y="3" width="14" height="18" rx="2" />
+            <path d="M9 8h6M9 12h6M9 16h3" />
+          </svg>
+        </span>
+        <div>
+          <h3>Desain yang terasa seperti Anda</h3>
+          <p>Tiga pilihan template, bebas disesuaikan.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon-tile" aria-hidden="true">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13" />
+          </svg>
+        </span>
+        <div>
+          <h3>Dekat dengan setiap tamu</h3>
+          <p>Undangan personal, RSVP, dan ucapan.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon-tile" aria-hidden="true">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z" />
+          </svg>
+        </span>
+        <div>
+          <h3>Teman menyusun cerita</h3>
+          <p>Compose membantu merangkai kata Anda.</p>
+        </div>
+      </article>
+    </div>
+    <section class="section" id="templates">
+      <div class="between">
+        <div class="section-head">
+          <span class="eyebrow">PILIH AWAL CERITA ANDA</span>
+          <h2>
+            Satu hari istimewa.
+            <br />
+            Beragam cara bercerita.
+          </h2>
+          <p>Temukan nuansa yang tepat, lalu jadikan milik Anda.</p>
+        </div>
+        <span class="badge">KOLEKSI WEDDING · 01</span>
+      </div>
+      <div class="grid-3">
+        {templates.map((t) => (
+          <a href={`/demo/${t.id}`} class="template-card">
+            <TemplateArt id={t.id} color={t.color} />
+            <div class="caption">
+              <div class="between">
+                <h3>{t.name}</h3>
+                <span aria-hidden="true">↗</span>
+              </div>
+              <span class="badge" style="margin:6px 0 10px">
+                {t.id === 'minimal-ivory' ? 'Mulai dari Starter' : 'Premium & Signature'}
+              </span>
+              <p class="muted" style="font-size:13px;margin:0">
+                {t.label}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+    <section class="section how-section" id="how-it-works">
+      <div class="section-head">
+        <span class="eyebrow">DARI CERITA, MENJADI PERAYAAN</span>
+        <h2>
+          Tiga langkah menuju
+          <br />
+          momen yang berarti.
+        </h2>
+        <p>Anda membawa ceritanya. CELEYO membantu merangkainya.</p>
+      </div>
+      <div class="how-grid">
+        <article class="how-card">
+          <span class="step-number">01</span>
+          <h3>Temukan nuansa Anda.</h3>
+          <p>Pilih salah satu template wedding, lalu coba draf gratis sebelum menentukan paket.</p>
+          <a href="#templates" class="link">
+            Jelajahi template ↗
+          </a>
+        </article>
+        <article class="how-card">
+          <span class="step-number">02</span>
+          <h3>Jadikan lebih personal.</h3>
+          <p>Tambahkan detail, foto dan musik. Susun sendiri atau rangkai kata bersama Compose.</p>
+        </article>
+        <article class="how-card">
+          <span class="step-number">03</span>
+          <h3>Undang. Lalu rayakan.</h3>
+          <p>
+            Setelah paket aktif, publikasikan dan bagikan tautan personal. Pantau RSVP serta ucapan
+            dalam satu tempat.
+          </p>
+        </article>
+      </div>
+    </section>
+    <section class="section" id="pricing">
+      <div class="section-head">
+        <span class="eyebrow">SEDERHANA SEJAK AWAL</span>
+        <h2>
+          Untuk perayaan Anda,
+          <br />
+          pilihan yang pas.
+        </h2>
+        <p>
+          Sekali bayar per acara. Tanpa biaya langganan bulanan.
+          <br />
+          Transfer bank dengan konfirmasi melalui WhatsApp.
+        </p>
+      </div>
+      <div class="grid-3">
+        {Object.values(pricePlans).map((p) => (
+          <article class:list={['price-card', { featured: p.id === 'premium' }]}>
+            {p.id === 'premium' && <span class="feature-tag">PILIHAN UTAMA</span>}
+            <span class="eyebrow">{p.name}</span>
+            <p class="price">{rupiah(p.price)}</p>
+            <p class="note">per acara · aktif {p.months} bulan</p>
+            <ul>
+              <li>{p.guests.toLocaleString('id-ID')} undangan personal</li>
+              <li>{p.photos} foto & musik pilihan</li>
+              <li>{p.ai} bantuan Compose</li>
+              <li>{p.id === 'starter' ? 'Template Minimal Ivory' : 'Semua template wedding'}</li>
+              <li>RSVP, ucapan & ekspor tamu</li>
+              <li>
+                {p.editors
+                  ? '1 kolaborator editor'
+                  : p.hideBrand
+                    ? 'Branding bisa disembunyikan'
+                    : 'Branding CELEYO kecil'}
+              </li>
+            </ul>
+            <a class:list={['btn', { secondary: p.id !== 'premium' }]} href="/register">
+              Pilih {p.name} ↗
+            </a>
+          </article>
+        ))}
+      </div>
+      <p class="note" style="margin-top:22px">
+        Masa aktif dimulai saat publikasi pertama, paling lambat 90 hari setelah pembayaran
+        disetujui. Jasa setup Rp199.000 tersedia terpisah dengan maksimum dua revisi.
+      </p>
+    </section>
+    <section class="section">
+      <div class="cta">
+        <BrandLogo variant="symbol" tone="inverse" decorative />
+        <span class="eyebrow">CREATE. INVITE. CELEBRATE.</span>
+        <h2>
+          Momen Anda layak
+          <br />
+          diceritakan dengan indah.
+        </h2>
+        <a href="/register" class="btn light">
+          Mulai cerita Anda ↗
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap public-footer">
+    <div class="between">
+      <div>
+        <a class="brand" href="/" aria-label="CELEYO — beranda">
+          <BrandLogo variant="horizontal" decorative />
+        </a>
+      </div>
+      <div>
+        <div class="footer-links">
+          <a href="/#templates">Template</a>
+          <a href="/#pricing">Harga</a>
+          <a href="/login">Masuk</a>
+        </div>
+        <p>© {new Date().getFullYear()} CELEYO · Dibuat untuk momen berarti.</p>
+      </div>
+    </div>
+  </footer>
+</Site>

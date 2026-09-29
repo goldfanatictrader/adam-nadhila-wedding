@@ -1,0 +1,610 @@
+---
+import '../styles/wedding.css';
+import { eventTime, type Content } from '../lib/content';
+interface Props {
+  content: Content;
+  template: string;
+  slug: string;
+  origin: string;
+  preview?: boolean;
+  demo?: boolean;
+  hideBrand?: boolean;
+  focal?: Record<string, string>;
+}
+const {
+  content: c,
+  template,
+  slug,
+  origin,
+  preview = false,
+  demo = false,
+  hideBrand = false,
+  focal = {},
+} = Astro.props;
+const asset = (id: string) => (id ? `/api/media/${id}` : '');
+const timestamp = eventTime(c),
+  validDate = Number.isFinite(timestamp);
+const date = validDate
+  ? new Intl.DateTimeFormat('id-ID', { dateStyle: 'long', timeZone: c.timezone }).format(timestamp)
+  : 'Tanggal akan diumumkan';
+const weekday = validDate
+  ? new Intl.DateTimeFormat('id-ID', { weekday: 'long', timeZone: c.timezone }).format(timestamp)
+  : 'Hari istimewa';
+const month = validDate
+  ? new Intl.DateTimeFormat('id-ID', {
+      month: 'long',
+      year: 'numeric',
+      timeZone: c.timezone,
+    }).format(timestamp)
+  : '';
+const displayNames = `${c.groom || 'Nama'} & ${c.bride || 'Pasangan'}`;
+const description = `Undangan pernikahan ${displayNames}. ${date}${c.venue ? ' di ' + c.venue : ''}.`;
+const zone =
+  c.timezone === 'Asia/Jayapura' ? 'WIT' : c.timezone === 'Asia/Makassar' ? 'WITA' : 'WIB';
+const imageStyle = (id: string) => `object-position:${focal[id] || '50% 50%'}`;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#fbf7f2" />
+    <title>{displayNames} — {date}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={displayNames} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {c.hero && <meta property="og:image" content={new URL(asset(c.hero), origin).toString()} />}
+    <link rel="icon" href="/favicon.svg" />
+    {!preview && <link rel="canonical" href={`${origin}/i/${slug}`} />}
+    <meta
+      name="robots"
+      content={preview || Astro.url.search ? 'noindex,nofollow' : 'index,follow'}
+    />
+  </head>
+  <body
+    class:list={['locked', 'wedding', template, c.palette, c.font]}
+    data-slug={slug}
+    data-preview={String(preview)}
+    data-start={validDate ? timestamp : ''}
+    data-names={displayNames}
+  >
+    {preview && (
+      <div class="demo-banner">
+        {demo ? 'Demo template · data contoh' : 'Pratinjau draf · hanya untuk pengelola'}
+        {demo && <a href="/register">Buat versi Anda ↗</a>}
+      </div>
+    )}
+    {c.music.type === 'audio' && c.music.asset && (
+      <audio id="bgMusic" src={asset(c.music.asset)} loop preload="none" />
+    )}
+    <section
+      id="gate"
+      class:list={['gate', { 'no-photo': !c.hero }]}
+      aria-label="Buka undangan pernikahan"
+    >
+      {c.hero && (
+        <img
+          src={asset(c.hero)}
+          style={imageStyle(c.hero)}
+          alt={displayNames}
+          class="gate-photo"
+          width="1600"
+          height="1067"
+        />
+      )}
+      <div class="gate-overlay" aria-hidden="true" />
+      <div class="petal petal-one" aria-hidden="true" />
+      <div class="petal petal-two" aria-hidden="true" />
+      <div class="gate-content">
+        <p class="eyebrow eyebrow-light">UNDANGAN PERNIKAHAN</p>
+        <p class="gate-title">
+          {c.groom || 'Nama'} <i>&</i> {c.bride || 'Pasangan'}
+        </p>
+        <p class="gate-date">
+          <span>{validDate ? c.date.split('-').reverse().join(' · ') : date}</span>
+          <span class="gate-location">{c.venue}</span>
+        </p>
+        <div class="guest-card">
+          <span>Kepada Yth.</span>
+          <strong id="guestName">Bapak/Ibu/Saudara/i</strong>
+        </div>
+        <button id="openInvitation" class="button button-light" type="button">
+          <span>Buka Undangan</span>
+          <span aria-hidden="true">↗</span>
+        </button>
+        <p class="gate-hint">
+          {c.music.type === 'audio'
+            ? 'Ketuk untuk membuka dengan musik'
+            : 'Dengan bahagia, kami mengundang Anda'}
+        </p>
+      </div>
+    </section>
+    <main id="mainContent" class="site-shell" aria-hidden="true" inert>
+      <a class="skip-link" href="#event">
+        Langsung ke detail acara
+      </a>
+      <section id="beranda" class="welcome" aria-labelledby="welcomeTitle">
+        <div class="welcome-wash" aria-hidden="true" />
+        <div class="welcome-content">
+          <p class="eyebrow">THE WEDDING OF</p>
+          <h1 id="welcomeTitle" tabindex="-1">
+            {c.groom || 'Nama'} <i>&</i>
+            <br />
+            {c.bride || 'Pasangan'}
+          </h1>
+          <p class="welcome-lead">{c.welcomeLead || c.opening}</p>
+          <dl class="quick-facts" aria-label="Ringkasan acara">
+            <div>
+              <dt>Tanggal</dt>
+              <dd>{date}</dd>
+            </div>
+            <div>
+              <dt>Waktu</dt>
+              <dd>
+                {c.time.replace(':', '.')} {zone}
+              </dd>
+            </div>
+            <div>
+              <dt>Lokasi</dt>
+              <dd>{c.venue || 'Lokasi akan diumumkan'}</dd>
+            </div>
+          </dl>
+          <div class="welcome-actions">
+            <a class="button button-primary" href="#event">
+              Lihat Detail Acara
+            </a>
+            <a class="button button-secondary" href="#rsvp">
+              Konfirmasi Kehadiran
+            </a>
+          </div>
+        </div>
+        <div class="welcome-visual" aria-hidden="true">
+          <div class="welcome-frame" />
+          {c.introPhoto ? (
+            <img
+              src={asset(c.introPhoto)}
+              style={imageStyle(c.introPhoto)}
+              alt=""
+              width="1200"
+              height="1600"
+            />
+          ) : (
+            <div class="photo-placeholder">
+              {c.groom.charAt(0) || '♡'} & {c.bride.charAt(0)}
+            </div>
+          )}
+          <span class="welcome-caption">A quiet kind of forever</span>
+        </div>
+        <p class="scroll-note" aria-hidden="true">
+          <span />
+          Gulir untuk kisah kami
+        </p>
+      </section>
+      <section id="couple" class="couple section-pad" aria-labelledby="coupleTitle">
+        <div class="section-heading reveal">
+          <p class="eyebrow">THE TWO OF US</p>
+          <h2 id="coupleTitle">
+            Dua hati,
+            <br />
+            <em>satu tujuan.</em>
+          </h2>
+          <p>{c.opening}</p>
+        </div>
+        <div class="couple-grid">
+          <article class="person-card reveal">
+            <span class="person-number" aria-hidden="true">
+              01
+            </span>
+            <p class="person-role">Mempelai Pria</p>
+            <h3>{c.groomFull || c.groom}</h3>
+            {c.groomParents && (
+              <p>
+                Putra dari
+                <br />
+                <strong>{c.groomParents}</strong>
+              </p>
+            )}
+            {c.groomInstagram && (
+              <a
+                class="person-instagram"
+                href={`https://www.instagram.com/${encodeURIComponent(c.groomInstagram.replace('@', ''))}/`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                @{c.groomInstagram.replace('@', '')}
+              </a>
+            )}
+          </article>
+          <div class="couple-mark reveal" aria-hidden="true">
+            <span>{c.groom.charAt(0)}</span>
+            <i>&</i>
+            <span>{c.bride.charAt(0)}</span>
+          </div>
+          <article class="person-card reveal">
+            <span class="person-number" aria-hidden="true">
+              02
+            </span>
+            <p class="person-role">Mempelai Wanita</p>
+            <h3>{c.brideFull || c.bride}</h3>
+            {c.brideParents && (
+              <p>
+                Putri dari
+                <br />
+                <strong>{c.brideParents}</strong>
+              </p>
+            )}
+            {c.brideInstagram && (
+              <a
+                class="person-instagram"
+                href={`https://www.instagram.com/${encodeURIComponent(c.brideInstagram.replace('@', ''))}/`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                @{c.brideInstagram.replace('@', '')}
+              </a>
+            )}
+          </article>
+        </div>
+      </section>
+      {c.sections.includes('story') && c.story.length > 0 && (
+        <section id="story" class="story" aria-labelledby="storyTitle">
+          <div class="story-intro section-pad">
+            <div class="section-heading section-heading-left reveal">
+              <p class="eyebrow">OUR STORY</p>
+              <h2 id="storyTitle">
+                Tentang hari-hari
+                <br />
+                <em>yang membawa kami ke sini.</em>
+              </h2>
+            </div>
+            <p class="story-intro-copy reveal">
+              {c.storyIntro || 'Setiap langkah mempertemukan kami, menuju hari yang penuh makna.'}
+            </p>
+          </div>
+          {c.story.map((s, i) => (
+            <article
+              class:list={[
+                'story-chapter',
+                'section-pad',
+                i % 2 ? 'story-chapter-horizon' : 'story-chapter-everyday',
+              ]}
+            >
+              {i % 2 === 1 && s.photo && (
+                <div class="horizon-visual reveal">
+                  <img
+                    loading="lazy"
+                    src={asset(s.photo)}
+                    style={imageStyle(s.photo)}
+                    alt={`Kisah ${displayNames}`}
+                    width="1600"
+                    height="1067"
+                  />
+                  <p aria-hidden="true">Kita, hari ini dan seterusnya.</p>
+                </div>
+              )}
+              <div class="story-copy reveal">
+                <p class="chapter-label">
+                  <span>Bab {['I', 'II', 'III', 'IV', 'V'][i]}</span>
+                  {s.kicker || ''}
+                </p>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+                {s.quote && <blockquote>{s.quote}</blockquote>}
+                {s.moments?.length && (
+                  <div class="mini-moments" role="group" aria-label="Momen perjalanan">
+                    {s.moments.map((m) => (
+                      <img
+                        loading="lazy"
+                        src={asset(m)}
+                        style={imageStyle(m)}
+                        alt={`Momen ${displayNames}`}
+                        width="1000"
+                        height="1250"
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+              {i % 2 === 0 && s.photo && (
+                <div class="story-collage reveal">
+                  <figure class="story-photo story-photo-main">
+                    <img
+                      loading="lazy"
+                      src={asset(s.photo)}
+                      style={imageStyle(s.photo)}
+                      alt={`Kisah ${displayNames}`}
+                      width="1200"
+                      height="1600"
+                    />
+                  </figure>
+                  {s.photo2 && (
+                    <figure class="story-photo story-photo-small">
+                      <img
+                        loading="lazy"
+                        src={asset(s.photo2)}
+                        style={imageStyle(s.photo2)}
+                        alt={`Kenangan ${displayNames}`}
+                        width="1200"
+                        height="1600"
+                      />
+                    </figure>
+                  )}
+                  <span class="story-flower" aria-hidden="true">
+                    ✽
+                  </span>
+                </div>
+              )}
+            </article>
+          ))}
+        </section>
+      )}
+      <section id="event" class="event section-pad" aria-labelledby="eventTitle">
+        <div class="event-leaf event-leaf-left" aria-hidden="true" />
+        <div class="event-leaf event-leaf-right" aria-hidden="true" />
+        <div class="event-card reveal">
+          <div
+            class="event-date"
+            style={c.eventPhoto ? `--event-photo:url(${asset(c.eventPhoto)})` : undefined}
+          >
+            <span>{weekday}</span>
+            <strong>{c.date.split('-')[2] || '♡'}</strong>
+            <span>{month}</span>
+          </div>
+          <div class="event-details">
+            <p class="eyebrow">HARI PERNIKAHAN</p>
+            <h2 id="eventTitle">
+              Dengan penuh bahagia,
+              <br />
+              <em>kami menanti kehadiran Anda.</em>
+            </h2>
+            <div class="event-time">
+              <span>{c.eventName}</span>
+              <strong>
+                {c.time.replace(':', '.')} {zone}
+              </strong>
+            </div>
+            <h3>{c.venue}</h3>
+            <p id="eventLocation" class="event-address">
+              {c.address}
+            </p>
+            <div class="event-actions">
+              {c.maps && (
+                <a class="button button-primary" target="_blank" rel="noreferrer" href={c.maps}>
+                  Buka di Google Maps
+                </a>
+              )}
+              <button
+                id="calendarBtn"
+                class="button button-secondary"
+                type="button"
+                disabled={!validDate}
+              >
+                Simpan ke Kalender
+              </button>
+              <button id="copyAddress" class="text-button" type="button">
+                Salin alamat
+              </button>
+            </div>
+            <p id="eventActionStatus" class="status-message" role="status" aria-live="polite" />
+          </div>
+        </div>
+      </section>
+      {c.sections.includes('gallery') && c.gallery.some((x) => x.id) && (
+        <section id="gallery" class="gallery section-pad" aria-labelledby="galleryTitle">
+          <div class="section-heading section-heading-left reveal">
+            <p class="eyebrow">MEMORIES</p>
+            <h2 id="galleryTitle">
+              Momen kecil,
+              <br />
+              <em>disimpan selamanya.</em>
+            </h2>
+          </div>
+          <div class="gallery-grid">
+            {c.gallery
+              .filter((x) => x.id)
+              .map((g, i) => (
+                <button
+                  class:list={[
+                    'gallery-item',
+                    'reveal',
+                    `gallery-item-${['one', 'two', 'three', 'four', 'five', 'six'][i] || 'extra'}`,
+                  ]}
+                  type="button"
+                  data-src={asset(g.id)}
+                  data-alt={g.alt || `Foto ${i + 1}`}
+                  aria-label={`Lihat ${g.alt || 'foto ' + (i + 1)}`}
+                >
+                  <img
+                    loading="lazy"
+                    src={asset(g.id)}
+                    style={imageStyle(g.id)}
+                    alt={g.alt || `Foto ${i + 1}`}
+                    width="1200"
+                    height="1600"
+                  />
+                </button>
+              ))}
+          </div>
+        </section>
+      )}
+      <section id="rsvp" class="rsvp section-pad" aria-labelledby="rsvpTitle">
+        <div class="rsvp-copy reveal">
+          <p class="eyebrow">RSVP & UCAPAN</p>
+          <h2 id="rsvpTitle">
+            Apakah Anda
+            <br />
+            <em>akan hadir?</em>
+          </h2>
+          <p>
+            Kehadiran dan doa restu Anda akan menjadi bagian yang sangat berarti dalam hari bahagia
+            kami.
+          </p>
+          <div class="rsvp-note">
+            <span aria-hidden="true">♡</span>
+            <p>
+              Satu ucapan untuk setiap undangan personal. Anda dapat memperbaruinya melalui tautan
+              yang sama.
+            </p>
+          </div>
+        </div>
+        <form id="rsvpForm" class="rsvp-form reveal" aria-disabled="true">
+          <p class="visually-hidden" aria-hidden="true">
+            <label>
+              Jangan isi
+              <input name="website" tabindex="-1" autocomplete="off" />
+            </label>
+          </p>
+          <p id="responseNote" class="response-note">
+            {preview
+              ? 'Form hanya aktif pada undangan yang telah dipublikasikan.'
+              : 'Buka tautan personal Anda untuk mengirim RSVP dan ucapan.'}
+          </p>
+          <div class="field field-full">
+            <label for="guestFullName">Nama tamu</label>
+            <input id="guestFullName" readonly required placeholder="Tamu undangan" />
+          </div>
+          <div class="field">
+            <label for="attendance">Konfirmasi Kehadiran</label>
+            <select id="attendance" name="attending" required disabled>
+              <option value="">Pilih jawaban</option>
+              <option value="yes">Insya Allah, saya hadir</option>
+              <option value="no">Mohon maaf, belum dapat hadir</option>
+            </select>
+          </div>
+          <div class="field" id="guestCountField">
+            <label for="guestCount">Jumlah tamu</label>
+            <select id="guestCount" name="party" disabled>
+              <option value="1">1</option>
+            </select>
+          </div>
+          <div class="field field-full">
+            <label for="guestMessage">Ucapan & Doa</label>
+            <textarea
+              id="guestMessage"
+              name="message"
+              rows="4"
+              maxlength={1000}
+              placeholder="Tuliskan doa terbaik Anda…"
+              disabled
+            />
+          </div>
+          <button class="button button-primary field-full" type="submit" disabled>
+            Kirim Konfirmasi
+          </button>
+          <p id="formStatus" class="form-status field-full" role="status" aria-live="polite" />
+        </form>
+      </section>
+      <section class="wish-feed" aria-label="Ucapan tamu">
+        <div id="wishFeed" />
+        <button id="moreWishes" class="button button-secondary" hidden>
+          Lihat ucapan lainnya
+        </button>
+      </section>
+      {c.sections.includes('gifts') && c.gifts.length > 0 && (
+        <section id="gift" class="gift section-pad" aria-labelledby="giftTitle">
+          <div class="gift-copy reveal">
+            <p class="eyebrow eyebrow-light">TANDA KASIH</p>
+            <h2 id="giftTitle">
+              Doa Anda adalah
+              <br />
+              <em>hadiah terindah.</em>
+            </h2>
+            <p>
+              Tanpa mengurangi rasa hormat, bagi yang ingin memberikan tanda kasih, dapat
+              disampaikan melalui rekening berikut.
+            </p>
+          </div>
+          <div class="bank-cards">
+            {c.gifts.map((g) => (
+              <div class="bank-card reveal" role="group" aria-label={g.bank}>
+                <span class="bank-name">{g.bank}</span>
+                <span class="bank-label">Nomor Rekening</span>
+                <strong class="account-number">{g.number}</strong>
+                <span class="account-name">a.n. {g.holder}</span>
+                <button class="copy-account button button-light" type="button">
+                  Salin Nomor Rekening
+                </button>
+                <p
+                  class="copy-status status-message status-message-light"
+                  role="status"
+                  aria-live="polite"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+      {c.music.type === 'youtube' && c.music.youtubeId && (
+        <details class="music-video" id="youtubePanel" data-video={c.music.youtubeId}>
+          <summary>♫ Putar musik pilihan kami</summary>
+          <div id="youtubePlayer" />
+        </details>
+      )}
+      <section class="closing" aria-labelledby="closingTitle">
+        {c.closingPhoto && (
+          <img
+            loading="lazy"
+            src={asset(c.closingPhoto)}
+            style={imageStyle(c.closingPhoto)}
+            alt={`Kenangan ${displayNames}`}
+            width="1600"
+            height="1067"
+          />
+        )}
+        <div class="closing-overlay" aria-hidden="true" />
+        <div class="closing-copy reveal">
+          <p>{c.closing}</p>
+          <h2 id="closingTitle">
+            {c.groom} <i>&</i> {c.bride}
+          </h2>
+          <p class="closing-date">{validDate ? c.date.split('-').reverse().join(' · ') : date}</p>
+          <p class="closing-thanks">Terima kasih</p>
+        </div>
+      </section>
+      {!hideBrand && (
+        <footer class="celeyo-footer celeyo-brand-footer">
+          <a href="https://celeyo.com/" aria-label="Dibuat dengan CELEYO — beranda">
+            <span>Dibuat dengan</span>
+            <img
+              src="/brand/logo-compact.svg"
+              width="576"
+              height="120"
+              alt="CELEYO"
+              decoding="async"
+            />
+          </a>
+        </footer>
+      )}
+    </main>
+    <nav id="bottomNav" class="utility-nav" aria-label="Navigasi undangan" hidden>
+      <a href="#beranda">Beranda</a>
+      {c.story.length > 0 && c.sections.includes('story') && <a href="#story">Cerita</a>}
+      <a href="#event">Acara</a>
+      <a href="#rsvp">RSVP</a>
+    </nav>
+    {c.music.type === 'audio' && (
+      <button
+        id="musicToggle"
+        class="music-toggle"
+        type="button"
+        aria-pressed="false"
+        aria-label="Nyalakan musik"
+        hidden
+      >
+        <span class="music-icon" aria-hidden="true">
+          ♪
+        </span>
+        <span id="musicLabel">Musik</span>
+      </button>
+    )}
+    <dialog id="lightbox" class="lightbox" aria-label="Tampilan foto">
+      <button id="closeLightbox" class="lightbox-close" type="button" aria-label="Tutup foto">
+        ×
+      </button>
+      <img id="lightboxImage" alt="" />
+    </dialog>
+    <script src="../lib/invitation.js" />
+  </body>
+</html>

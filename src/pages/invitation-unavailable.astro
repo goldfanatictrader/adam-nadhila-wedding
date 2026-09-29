@@ -1,0 +1,24 @@
+---
+import Site from '../layouts/Site.astro';
+Astro.response.status = 404;
+---
+
+<Site title="Undangan belum tersedia — CELEYO" noindex>
+  <main id="main-content" tabindex="-1" class="auth-shell">
+    <div class="auth-card">
+      <span class="eyebrow">CELEYO</span>
+      <h1 style="margin-top:20px">
+        Belum saatnya
+        <br />
+        cerita ini dibuka.
+      </h1>
+      <p class="muted">
+        Undangan belum tersedia atau masa aktifnya telah berakhir. Hubungi pengirim untuk
+        mendapatkan tautan terbaru.
+      </p>
+      <a class="btn secondary" href="/">
+        Kembali ke CELEYO
+      </a>
+    </div>
+  </main>
+</Site>

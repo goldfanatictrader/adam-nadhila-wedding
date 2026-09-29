@@ -1,0 +1,17 @@
+---
+import Site from '../../layouts/Site.astro';
+import Dashboard from '../../components/Dashboard';
+import { env } from 'cloudflare:workers';
+import type { Env } from '../../lib/types';
+import { actor } from '../../lib/server/auth';
+let user;
+try {
+  user = await actor(env as unknown as Env, Astro.request);
+} catch {
+  return Astro.redirect('/login');
+}
+---
+
+<Site title="Undangan saya — CELEYO" nav={false} noindex>
+  <Dashboard name={user.name} admin={user.admin} client:load />
+</Site>

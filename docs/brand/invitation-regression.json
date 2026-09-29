@@ -1,0 +1,77 @@
+{
+  "method": "Chromium, fixed initial clock, full page cropped at pre-brand footer top; no content masks. One-channel-value tolerance for composited shadow rounding. Raw differences retained below.",
+  "results": [
+    {
+      "name": "minimal",
+      "width": 390,
+      "height": 6478,
+      "afterHeight": 6478,
+      "differentPixelsOutsideFooter": 10209,
+      "maxChannelDifference": 1,
+      "differentPixelsAbove1Of255": 0
+    },
+    {
+      "name": "minimal",
+      "width": 1440,
+      "height": 6221,
+      "afterHeight": 6221,
+      "differentPixelsOutsideFooter": 0,
+      "maxChannelDifference": 0,
+      "differentPixelsAbove1Of255": 0
+    },
+    {
+      "name": "botanical",
+      "width": 390,
+      "height": 6794,
+      "afterHeight": 6794,
+      "differentPixelsOutsideFooter": 0,
+      "maxChannelDifference": 0,
+      "differentPixelsAbove1Of255": 0
+    },
+    {
+      "name": "botanical",
+      "width": 1440,
+      "height": 6664,
+      "afterHeight": 6664,
+      "differentPixelsOutsideFooter": 0,
+      "maxChannelDifference": 0,
+      "differentPixelsAbove1Of255": 0
+    },
+    {
+      "name": "editorial",
+      "width": 390,
+      "height": 6668,
+      "afterHeight": 6668,
+      "differentPixelsOutsideFooter": 10210,
+      "maxChannelDifference": 1,
+      "differentPixelsAbove1Of255": 0
+    },
+    {
+      "name": "editorial",
+      "width": 1440,
+      "height": 6583,
+      "afterHeight": 6583,
+      "differentPixelsOutsideFooter": 9343,
+      "maxChannelDifference": 1,
+      "differentPixelsAbove1Of255": 0
+    },
+    {
+      "name": "pilot",
+      "width": 390,
+      "height": 10267,
+      "afterHeight": 10267,
+      "differentPixelsOutsideFooter": 0,
+      "maxChannelDifference": 0,
+      "differentPixelsAbove1Of255": 0
+    },
+    {
+      "name": "pilot",
+      "width": 1440,
+      "height": 9426,
+      "afterHeight": 9426,
+      "differentPixelsOutsideFooter": 0,
+      "maxChannelDifference": 0,
+      "differentPixelsAbove1Of255": 0
+    }
+  ]
+}

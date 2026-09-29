@@ -1,0 +1,27 @@
+---
+import Site from '../layouts/Site.astro';
+import AuthForm from '../components/AuthForm';
+import BrandLogo from '../components/BrandLogo.astro';
+import { env } from 'cloudflare:workers';
+import type { Env } from '../lib/types';
+const sitekey = (env as unknown as Env).PUBLIC_TURNSTILE_SITE_KEY || '';
+---
+
+<Site title="Masuk — CELEYO" noindex>
+  <main id="main-content" tabindex="-1" class="auth-shell">
+    <div class="auth-layout">
+      <aside class="auth-story">
+        <BrandLogo variant="horizontal" tone="inverse" />
+        <div>
+          <h2>
+            Untuk cerita yang
+            <br />
+            layak dirayakan.
+          </h2>
+          <p>Temukan nuansa Anda. Undang orang-orang terdekat. Simpan setiap momen berarti.</p>
+        </div>
+      </aside>
+      <AuthForm mode="login" sitekey={sitekey} client:load />
+    </div>
+  </main>
+</Site>

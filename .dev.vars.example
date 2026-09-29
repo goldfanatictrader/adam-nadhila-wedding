@@ -1,0 +1,7 @@
+# Copy to .dev.vars; generate each value with: openssl rand -hex 32
+BETTER_AUTH_SECRET=
+GUEST_ENCRYPTION_KEY=
+RATE_LIMIT_SECRET=
+# Production also needs Turnstile. Local development does not send email or call AI.
+TURNSTILE_SECRET_KEY=
+PUBLIC_TURNSTILE_SITE_KEY=

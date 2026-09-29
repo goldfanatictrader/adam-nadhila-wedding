@@ -1,0 +1,55 @@
+{
+  "id": "launch-v1",
+  "plans": {
+    "starter": {
+      "id": "starter",
+      "name": "Starter",
+      "price": 49000,
+      "months": 3,
+      "guests": 150,
+      "photos": 5,
+      "media": 75000000,
+      "ai": 10,
+      "editors": 0,
+      "hideBrand": false
+    },
+    "premium": {
+      "id": "premium",
+      "name": "Premium",
+      "price": 149000,
+      "months": 6,
+      "guests": 500,
+      "photos": 20,
+      "media": 250000000,
+      "ai": 50,
+      "editors": 0,
+      "hideBrand": true
+    },
+    "signature": {
+      "id": "signature",
+      "name": "Signature",
+      "price": 299000,
+      "months": 12,
+      "guests": 1500,
+      "photos": 40,
+      "media": 500000000,
+      "ai": 150,
+      "editors": 1,
+      "hideBrand": true
+    }
+  },
+  "addons": {
+    "ai": {
+      "name": "100 bantuan AI",
+      "price": 19000
+    },
+    "extension": {
+      "name": "Perpanjangan 6 bulan",
+      "price": 49000
+    },
+    "setup": {
+      "name": "Jasa setup \u00b7 2 revisi",
+      "price": 199000
+    }
+  }
+}

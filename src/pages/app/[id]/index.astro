@@ -1,0 +1,18 @@
+---
+import Site from '../../../layouts/Site.astro';
+import Dashboard from '../../../components/Dashboard';
+import { env } from 'cloudflare:workers';
+import type { Env } from '../../../lib/types';
+import { actor, accessEvent } from '../../../lib/server/auth';
+let user;
+try {
+  user = await actor(env as unknown as Env, Astro.request);
+  await accessEvent(env as unknown as Env, user, Astro.params.id!);
+} catch {
+  return Astro.redirect('/app');
+}
+---
+
+<Site title="Studio undangan — CELEYO" nav={false} noindex>
+  <Dashboard name={user.name} admin={user.admin} eventId={Astro.params.id} client:load />
+</Site>

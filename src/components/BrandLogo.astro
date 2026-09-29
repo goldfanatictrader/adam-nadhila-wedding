@@ -1,0 +1,31 @@
+---
+interface Props {
+  variant?: 'compact' | 'horizontal' | 'stacked' | 'symbol';
+  tone?: 'color' | 'mono' | 'inverse';
+  class?: string;
+  decorative?: boolean;
+}
+const {
+  variant = 'compact',
+  tone = 'color',
+  class: className = '',
+  decorative = false,
+} = Astro.props;
+const file = variant === 'symbol' ? 'symbol' : `logo-${variant}`;
+const dimensions =
+  variant === 'symbol'
+    ? [120, 120]
+    : variant === 'stacked'
+      ? [465, 380]
+      : [576, variant === 'horizontal' ? 148 : 120];
+---
+
+<img
+  class:list={['brand-logo', `brand-logo-${variant}`, className]}
+  src={`/brand/${file}${tone === 'color' ? '' : `-${tone}`}.svg`}
+  width={dimensions[0]}
+  height={dimensions[1]}
+  alt={decorative ? '' : 'CELEYO'}
+  aria-hidden={decorative ? 'true' : undefined}
+  decoding="async"
+/>

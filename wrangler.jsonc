@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "celeyo-local",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-09-29",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": { "binding": "ASSETS" },
+  "d1_databases": [{ "binding": "DB", "database_name": "celeyo-local", "database_id": "00000000-0000-0000-0000-000000000000", "migrations_dir": "migrations" }],
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "celeyo-local" }],
+  "vars": {
+    "APP_ENV": "local", "PUBLIC_SITE_URL": "http://localhost:4321", "BETTER_AUTH_URL": "http://localhost:4321",
+    "AI_ENABLED": "false", "AI_DAILY_BUDGET_MICRO_USD": "100000", "EMAIL_FROM": "CELEYO <hello@celeyo.com>"
+  },
+  "triggers": { "crons": ["*/15 * * * *"] },
+  "observability": { "enabled": false }
+}

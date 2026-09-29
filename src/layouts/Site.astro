@@ -1,0 +1,117 @@
+---
+import '../styles/platform.css';
+import BrandLogo from '../components/BrandLogo.astro';
+import { env } from 'cloudflare:workers';
+import type { Env } from '../lib/types';
+interface Props {
+  title?: string;
+  description?: string;
+  nav?: boolean;
+  noindex?: boolean;
+}
+const {
+  title = 'CELEYO — Create. Invite. Celebrate.',
+  description = 'Undangan pernikahan digital yang terasa seperti Anda. Pilih template, susun kisah, dan rayakan bersama CELEYO.',
+  nav = true,
+  noindex = false,
+} = Astro.props;
+const origin = (env as unknown as Env).PUBLIC_SITE_URL;
+---
+
+<!doctype html>
+<html lang="id" class="celeyo-platform">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#FAF1E6" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/brand/icon-180.png" />
+    <link
+      rel="preload"
+      href="/fonts/platform/inter-roman.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    {noindex ? (
+      <meta name="robots" content="noindex,nofollow" />
+    ) : (
+      <>
+        <link rel="canonical" href={new URL(Astro.url.pathname, origin).toString()} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={new URL('/brand/social-card.png', origin).toString()} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </>
+    )}
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">
+      Lewati ke konten utama
+    </a>
+    {nav && (
+      <header class="public-nav">
+        <a href="/" class="brand" aria-label="CELEYO — beranda">
+          <BrandLogo decorative />
+        </a>
+        <nav class="desktop-public-nav" aria-label="Navigasi utama">
+          <a href="/#templates">Template</a>
+          <a href="/#how-it-works">Cara kerja</a>
+          <a href="/#pricing">Harga</a>
+          <div class="nav-auth">
+            <a href="/login">Masuk</a>
+            <a href="/register" class="btn">
+              Mulai undangan <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </nav>
+        <details class="mobile-menu">
+          <summary aria-label="Menu navigasi">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+          </summary>
+          <nav aria-label="Navigasi mobile">
+            <a href="/#templates">Template</a>
+            <a href="/#how-it-works">Cara kerja</a>
+            <a href="/#pricing">Harga</a>
+            <a href="/login">Masuk</a>
+            <a href="/register" class="btn">
+              Mulai undangan ↗
+            </a>
+          </nav>
+        </details>
+      </header>
+    )}
+    <slot />
+    <script>
+      document.querySelectorAll<HTMLDetailsElement>('.mobile-menu').forEach((menu) => {
+        menu.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            menu.open = false;
+            menu.querySelector('summary')?.focus();
+          }
+        });
+        menu.querySelectorAll('a').forEach((link) =>
+          link.addEventListener('click', () => {
+            menu.open = false;
+          }),
+        );
+      });
+    </script>
+  </body>
+</html>

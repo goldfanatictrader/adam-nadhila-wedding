@@ -1,0 +1,45 @@
+---
+import Wedding from '../../components/Wedding.astro';
+import { templates } from '../../lib/catalog';
+import { blankContent, type Content } from '../../lib/content';
+const template = templates.find((t) => t.id === Astro.params.template);
+if (!template) return Astro.redirect('/#templates');
+const content: Content = {
+  ...blankContent,
+  groom: 'Aruna',
+  bride: 'Bima',
+  groomFull: 'Aruna Prameswari',
+  brideFull: 'Bima Adiwangsa',
+  date: '2027-06-19',
+  time: '09:00',
+  venue: 'Taman Cerita',
+  address: 'Alamat contoh · diisi sesuai lokasi acara Anda',
+  palette:
+    template.id === 'botanical-bloom'
+      ? 'sage'
+      : template.id === 'editorial-journey'
+        ? 'terracotta'
+        : 'ivory',
+  story: [
+    {
+      title: 'Dari pertemuan menjadi rumah.',
+      body: 'Di antara langkah-langkah kecil, kami menemukan alasan untuk terus berjalan bersama. Setiap percakapan menjadi awal untuk cerita berikutnya.',
+      photo: '',
+    },
+    {
+      title: 'Menuju hari-hari yang baru.',
+      body: 'Dengan doa keluarga dan orang-orang terdekat, kami memilih untuk membuka lembaran baru bersama.',
+      photo: '',
+    },
+  ],
+};
+---
+
+<Wedding
+  content={content}
+  template={template.id}
+  slug="demo"
+  origin="https://celeyo.com"
+  preview
+  demo
+/>

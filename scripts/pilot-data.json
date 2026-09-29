@@ -1,0 +1,90 @@
+{
+  "groom": "Adam",
+  "bride": "Nadhila",
+  "groomFull": "Adam Alfiansyah S.H",
+  "brideFull": "Nadhila Rachmawati, S.Psi.",
+  "groomParents": "Alm. Bapak Dariansyah\ndan Almh. Ibu Ani Arumiati",
+  "brideParents": "Bapak Sugiyanto\ndan Ibu Haniyah Ichlasiyahati",
+  "groomInstagram": "adam.alfiansyah",
+  "brideInstagram": "nadhilarchmwt",
+  "opening": "Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk merayakan hari bahagia kami.",
+  "welcomeLead": "Dari banyak hari sederhana, menuju satu janji untuk berjalan bersama selamanya.",
+  "closing": "Merupakan sebuah kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir dan memberikan doa restu.",
+  "date": "2026-12-26",
+  "time": "09:00",
+  "timezone": "Asia/Jakarta",
+  "eventName": "Akad & Syukuran",
+  "venue": "Kediaman Mempelai Wanita",
+  "address": "Jl. Nilam II, No. 5, RT/RW 04/010\nJatiraden, Jatisampurna\nBekasi 17433",
+  "maps": "https://maps.app.goo.gl/tYcqEJPrFE5dXKF79",
+  "storyIntro": "Bukan tentang satu momen besar. Kisah kami tumbuh dari perjalanan kecil, percakapan panjang, dan keyakinan untuk terus memilih satu sama lain.",
+  "story": [
+    {
+      "title": "Menemukan rumah\ndalam keseharian.",
+      "kicker": "Awal yang sederhana",
+      "body": "Di tengah dunia yang terus bergerak, kami menemukan seseorang untuk berjalan bersama—pergi tanpa tergesa, berhenti sejenak, lalu berbicara lebih lama.",
+      "quote": "“Ada rumah yang bukan sebuah tempat.”",
+      "photo": "pilot-everyday-2-webp",
+      "photo2": "pilot-everyday-4-webp"
+    },
+    {
+      "title": "Memilih arah\nyang sama.",
+      "kicker": "Janji yang tenang",
+      "body": "Yang sederhana tumbuh menjadi keyakinan: tentang tetap memilih satu sama lain, menyambut hari ini, esok, dan hari-hari setelahnya.",
+      "photo": "pilot-horizon-1-webp",
+      "moments": ["pilot-horizon-2-webp", "pilot-horizon-3-webp"]
+    }
+  ],
+  "hero": "pilot-hero-webp",
+  "introPhoto": "pilot-intro-webp",
+  "eventPhoto": "pilot-gallery-6-webp",
+  "closingPhoto": "pilot-closing-webp",
+  "gallery": [
+    {
+      "id": "pilot-gallery-1-webp",
+      "alt": "Adam dan Nadhila menikmati waktu bersama di kota"
+    },
+    {
+      "id": "pilot-gallery-2-webp",
+      "alt": "Potret hangat Adam dan Nadhila"
+    },
+    {
+      "id": "pilot-gallery-3-webp",
+      "alt": "Adam dan Nadhila tersenyum bersama"
+    },
+    {
+      "id": "pilot-gallery-4-webp",
+      "alt": "Adam dan Nadhila dalam perjalanan mereka"
+    },
+    {
+      "id": "pilot-gallery-5-webp",
+      "alt": "Kebersamaan Adam dan Nadhila"
+    },
+    {
+      "id": "pilot-gallery-6-webp",
+      "alt": "Adam dan Nadhila memandang cakrawala"
+    }
+  ],
+  "gifts": [
+    {
+      "bank": "BCA",
+      "number": "7401662727",
+      "holder": "Nadhila Rachmawati"
+    },
+    {
+      "bank": "BNI",
+      "number": "1229896497",
+      "holder": "Nadhila Rachmawati"
+    }
+  ],
+  "music": {
+    "type": "audio",
+    "asset": "pilot-paul-partohap-i-got-mine-mp3",
+    "youtubeId": ""
+  },
+  "palette": "ivory",
+  "font": "serif",
+  "hideBrand": false,
+  "sections": ["story", "gallery", "gifts"],
+  "whatsappMessage": "Yth. {nama}, dengan bahagia kami mengundang Anda ke pernikahan Adam & Nadhila. Detail acara dan konfirmasi kehadiran: {link}"
+}

@@ -1,0 +1,21 @@
+---
+import { env } from 'cloudflare:workers';
+import type { Env } from '../../lib/types';
+import Site from '../../layouts/Site.astro';
+import DesignSystem from '../../components/DesignSystem';
+if ((env as unknown as Env).APP_ENV !== 'local') {
+  return new Response('Not found', { status: 404, headers: { 'X-Robots-Tag': 'noindex' } });
+}
+---
+
+<Site title="Design system — CELEYO" noindex>
+  <main id="main-content" tabindex="-1" class="wrap design-system">
+    <span class="eyebrow">CELEYO / Brand & interface / v1</span>
+    <h1>Dirancang untuk momen berarti.</h1>
+    <p class="muted">
+      Panduan lokal identitas dan komponen. Data di halaman ini merupakan contoh, bukan data
+      pelanggan.
+    </p>
+    <DesignSystem client:load />
+  </main>
+</Site>

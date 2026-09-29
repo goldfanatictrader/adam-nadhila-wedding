@@ -1,0 +1,24 @@
+---
+import Site from '../layouts/Site.astro';
+import AuthForm from '../components/AuthForm';
+import AppShell from '../components/AppShell';
+import { env } from 'cloudflare:workers';
+import type { Env } from '../lib/types';
+import { actor } from '../lib/server/auth';
+let user;
+try {
+  user = await actor(env as unknown as Env, Astro.request);
+} catch {
+  return Astro.redirect('/login');
+}
+---
+
+<Site title="Akun & keamanan — CELEYO" nav={false} noindex>
+  <AppShell name={user.name} admin={user.admin} active="account">
+    <div style="max-width:650px">
+      <h1>Akun & keamanan</h1>
+      <p class="muted">{user.email}</p>
+      <AuthForm mode="account" client:load />
+    </div>
+  </AppShell>
+</Site>

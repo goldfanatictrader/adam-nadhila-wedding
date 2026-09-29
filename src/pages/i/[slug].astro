@@ -1,0 +1,42 @@
+---
+import Wedding from '../../components/Wedding.astro';
+import '../../styles/invitation-compat.css';
+import { env } from 'cloudflare:workers';
+import type { Env, EventRow } from '../../lib/types';
+import { contentSchema } from '../../lib/content';
+import { publicEvent } from '../../lib/server/events';
+import { all } from '../../lib/server/db';
+const bindings = env as unknown as Env;
+let event: EventRow | null = null;
+try {
+  event = await publicEvent(bindings, Astro.params.slug!);
+} catch {
+  Astro.response.status = 404;
+}
+if (!event) return Astro.rewrite('/invitation-unavailable');
+const content = contentSchema.parse(JSON.parse(event.published!));
+const focal = event
+  ? Object.fromEntries(
+      (
+        await all<{ id: string; focal_x: number; focal_y: number }>(
+          bindings.DB,
+          'SELECT id,focal_x,focal_y FROM media_assets WHERE tenant_id=? AND event_id=?',
+          event.tenant_id,
+          event.id,
+        )
+      ).map((m) => [m.id, `${m.focal_x}% ${m.focal_y}%`]),
+    )
+  : {};
+---
+
+<Wedding
+  content={content}
+  template={
+    (event as EventRow & { published_template_id: string }).published_template_id ||
+    event.template_id
+  }
+  slug={event.slug}
+  origin={bindings.PUBLIC_SITE_URL}
+  hideBrand={event.plan !== 'starter' && content.hideBrand}
+  focal={focal}
+/>

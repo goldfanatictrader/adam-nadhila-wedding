@@ -1,0 +1,18 @@
+---
+import Site from '../layouts/Site.astro';
+import Admin from '../components/Admin';
+import { env } from 'cloudflare:workers';
+import type { Env } from '../lib/types';
+import { actor } from '../lib/server/auth';
+let user;
+try {
+  user = await actor(env as unknown as Env, Astro.request);
+} catch {
+  return Astro.redirect('/login');
+}
+if (!user.admin) return Astro.redirect('/app');
+---
+
+<Site title="Superadmin — CELEYO" nav={false} noindex>
+  <Admin name={user.name} client:load />
+</Site>

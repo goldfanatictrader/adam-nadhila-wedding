@@ -1,0 +1,15 @@
+---
+const { id = 'minimal-ivory', color = '#ecdfcf' } = Astro.props;
+---
+
+<div class:list={['template-art', id]} style={`--tint:${color}`} aria-hidden="true">
+  <img
+    class="template-preview"
+    src={`/brand/template-previews/${id}.webp`}
+    width="390"
+    height="900"
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+</div>

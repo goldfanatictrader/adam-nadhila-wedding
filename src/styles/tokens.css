@@ -1,0 +1,47 @@
+/* CELEYO digital identity v1. Loaded by the platform shell only. */
+:root {
+  --forest: #142c22;
+  --terracotta: #bc5538;
+  --ivory: #faf1e6;
+  --sand: #e7ceb7;
+  --sage: #818361;
+  --paper: var(--ivory);
+  --white: #fffbf6;
+  --surface-subtle: #f1e4d5;
+  --ink: var(--forest);
+  --muted: #615d50;
+  --line: #dfd2c2;
+  --control-border: #867b69;
+  --brand: var(--terracotta);
+  --brand-dark: #a64730;
+  --brand-pressed: #863924;
+  --on-brand: #ffffff;
+  --selected: #f5e2d5;
+  --disabled-surface: #e9dfd2;
+  --disabled-text: #6a6258;
+  --success: #31533b;
+  --success-surface: #e8efdf;
+  --warning: #795019;
+  --warning-surface: #fff0d4;
+  --red: #a63529;
+  --danger-surface: #fce8e1;
+  --info: #325562;
+  --info-surface: #e8f0ee;
+  --focus: var(--forest);
+  --radius: 18px;
+  --radius-control: 11px;
+  --shadow-card: 0 8px 24px #142c2207;
+  --shadow-floating: 0 20px 64px #142c221a;
+  --font-ui: 'Inter', Arial, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --duration: 160ms;
+}
